@@ -39,8 +39,13 @@ const Header = ({ session }) => {
       <div className="header-right">
         {session ? (
           <>
-            <div className="points-display">
-              <span>🪙</span> 0
+            <div className="points-container">
+              <div className="points-display">
+                <span>🪙</span> 0
+              </div>
+              <span className="points-tooltip">
+                Estos son tus puntos. Ganas puntos al registrar vuelos.
+              </span>
             </div>
             <div className="profile-container" ref={dropdownRef}>
               <div className="profile-icon" onClick={toggleDropdown}>
