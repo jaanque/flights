@@ -39,7 +39,9 @@ const Header = ({ session }) => {
       <div className="header-right">
         {session ? (
           <>
-            <button className="points-button">CONSULTAR PUNTOS</button>
+            <div className="points-display">
+              <span>🪙</span> 0
+            </div>
             <div className="profile-container" ref={dropdownRef}>
               <div className="profile-icon" onClick={toggleDropdown}>
                 {session.user.email.charAt(0).toUpperCase()}
