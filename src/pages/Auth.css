@@ -1,10 +1,27 @@
+.auth-page {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.auth-image-panel {
+  width: 50%;
+  background-image: url('https://images.unsplash.com/photo-1558986835-393c3def442c');
+  background-size: cover;
+  background-position: center;
+}
+
+.auth-form-panel {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .auth-container {
   max-width: 400px;
-  margin: 40px auto;
+  width: 100%;
   padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
@@ -16,14 +33,14 @@
 }
 
 .auth-form input {
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
 }
 
 .auth-form button {
-  padding: 10px;
+  padding: 12px;
   border: none;
   border-radius: 5px;
   background-color: #007bff;

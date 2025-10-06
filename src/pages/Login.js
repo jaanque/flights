@@ -20,25 +20,32 @@ const Login = () => {
   };
 
   return (
-    <div className="auth-container">
-      <h1>Iniciar Sesión</h1>
-      <form onSubmit={handleLogin} className="auth-form">
-        <input
-          type="email"
-          placeholder="Correo electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Iniciar Sesión</button>
-      </form>
+    <div className="auth-page">
+      <div className="auth-image-panel">
+        {/* Background image will be set via CSS */}
+      </div>
+      <div className="auth-form-panel">
+        <div className="auth-container">
+          <h1>Iniciar Sesión</h1>
+          <form onSubmit={handleLogin} className="auth-form">
+            <input
+              type="email"
+              placeholder="Correo electrónico"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button type="submit">Iniciar Sesión</button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
