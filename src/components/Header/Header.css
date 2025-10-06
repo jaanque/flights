@@ -1,0 +1,53 @@
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-left, .header-center, .header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-center {
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.pro-user-button, .points-button, .login-button, .register-button {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.main-menu {
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  padding: 10px 100px; /* Increased padding to make it larger */
+  font-size: 16px;
+  text-align: center;
+  margin: 0 20px;
+}
+
+.header-right {
+  gap: 15px;
+}
+
+.profile-icon {
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  text-align: center;
+  cursor: pointer;
+}
