@@ -41,7 +41,7 @@ const Header = ({ session }) => {
           <>
             <div className="points-container">
               <div className="points-display">
-                <span>🪙</span> 0
+                <span>🪙</span> <span className="points-value">0</span>
               </div>
               <span className="points-tooltip">
                 Estos son tus puntos. Ganas puntos al registrar vuelos.
