@@ -27,12 +27,26 @@
 }
 
 .main-menu {
+  display: flex;
+  gap: 20px;
   background-color: #f0f0f0;
   border-radius: 20px;
-  padding: 10px 100px; /* Increased padding to make it larger */
-  font-size: 16px;
-  text-align: center;
+  padding: 10px 20px;
   margin: 0 20px;
+}
+
+.main-menu a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 15px;
+  transition: background-color 0.3s;
+}
+
+.main-menu a:hover,
+.main-menu a.active {
+  background-color: #ddd;
 }
 
 .header-right {

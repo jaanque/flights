@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = ({ isLoggedIn }) => {
@@ -8,7 +9,13 @@ const Header = ({ isLoggedIn }) => {
         <button className="pro-user-button">CONVERTIRSE A USUARIO PRO</button>
       </div>
       <div className="header-center">
-        <div className="main-menu">MENÚ PRINCIPAL</div>
+        <nav className="main-menu">
+          <Link to="/">Inicio</Link>
+          <Link to="/registrar-vuelo">Registrar Vuelo</Link>
+          <Link to="/ranking">Ranking</Link>
+          <Link to="/mis-vuelos">Mis Vuelos</Link>
+          <Link to="/contacto">Contacto</Link>
+        </nav>
       </div>
       <div className="header-right">
         {isLoggedIn ? (
