@@ -36,6 +36,10 @@
   padding: 10px 20px;
   cursor: pointer;
   font-size: 14px;
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+  text-align: center;
 }
 
 .main-menu {

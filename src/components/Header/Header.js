@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../../supabaseClient';
 import './Header.css';
 
-const Header = ({ isLoggedIn }) => {
+const Header = ({ session }) => {
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  };
+
   return (
     <header className="main-header">
       <div className="header-left">
@@ -18,15 +23,16 @@ const Header = ({ isLoggedIn }) => {
         </nav>
       </div>
       <div className="header-right">
-        {isLoggedIn ? (
+        {session ? (
           <>
             <button className="points-button">CONSULTAR PUNTOS</button>
-            <div className="profile-icon">ICONA DE PERFIL</div>
+            <div className="profile-icon">{session.user.email.charAt(0).toUpperCase()}</div>
+            <button onClick={handleLogout} className="register-button">CERRAR SESIÓN</button>
           </>
         ) : (
           <>
-            <button className="login-button">INICIAR SESIÓN</button>
-            <button className="register-button">REGISTRARSE</button>
+            <Link to="/login" className="login-button">INICIAR SESIÓN</Link>
+            <Link to="/register" className="register-button">REGISTRARSE</Link>
           </>
         )}
       </div>
