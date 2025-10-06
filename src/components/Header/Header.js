@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
+import ProfileDropdown from './ProfileDropdown';
 import './Header.css';
 
 const Header = ({ session }) => {
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-  };
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef]);
 
   return (
     <header className="main-header">
@@ -26,8 +40,12 @@ const Header = ({ session }) => {
         {session ? (
           <>
             <button className="points-button">CONSULTAR PUNTOS</button>
-            <div className="profile-icon">{session.user.email.charAt(0).toUpperCase()}</div>
-            <button onClick={handleLogout} className="register-button">CERRAR SESIÓN</button>
+            <div className="profile-container" ref={dropdownRef}>
+              <div className="profile-icon" onClick={toggleDropdown}>
+                {session.user.email.charAt(0).toUpperCase()}
+              </div>
+              {isDropdownOpen && <ProfileDropdown onLogout={() => setIsDropdownOpen(false)} />}
+            </div>
           </>
         ) : (
           <>
