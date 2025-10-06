@@ -2,14 +2,8 @@
   font-family: sans-serif;
 }
 
-.controls {
+main {
   padding: 20px;
   text-align: center;
   margin-top: 20px;
-}
-
-.controls button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
 }

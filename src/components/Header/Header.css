@@ -12,6 +12,18 @@
   align-items: center;
 }
 
+.header-left, .header-right {
+  flex: 1;
+}
+
+.header-left {
+  justify-content: flex-start;
+}
+
+.header-right {
+  justify-content: flex-end;
+}
+
 .header-center {
   flex-grow: 1;
   justify-content: center;
