@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 import ProfileDropdown from './ProfileDropdown';
+import Notifications from '../Notifications/Notifications';
 import './Header.css';
 
 const Header = ({ session }) => {
@@ -168,6 +169,7 @@ const Header = ({ session }) => {
                 Estos son tus minutos acumulados por retrasos de vuelos.
               </span>
             </div>
+            <Notifications session={session} />
             <div className="profile-container" ref={dropdownRef}>
               <div className="profile-icon" onClick={toggleDropdown}>
                 {session.user.email.charAt(0).toUpperCase()}
