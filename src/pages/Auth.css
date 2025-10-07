@@ -86,6 +86,46 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.auth-form button:disabled {
+  background-color: #a0aec0; /* Un gris para indicar que está deshabilitado */
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.username-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.username-input-container input {
+  width: 100%;
+}
+
+.username-available,
+.username-taken {
+  position: absolute;
+  right: 15px;
+  font-size: 18px;
+}
+
+.username-available {
+  color: #48bb78; /* Verde para disponible */
+}
+
+.username-taken {
+  color: #f56565; /* Rojo para no disponible */
+}
+
+.error-message {
+  color: #f56565;
+  font-size: 14px;
+  text-align: left;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
 /* Estilos para el texto y enlace inferior */
 .auth-container p {
   margin-top: 25px;
