@@ -202,6 +202,28 @@
   background-color: #ddd;
 }
 
+/* Contenedor para el botón de añadir vuelo y su tooltip */
+.add-flight-container {
+  position: relative;
+  display: inline-block;
+}
+
+.add-flight-button.disabled {
+  background-color: #e2e2e2;
+  color: #a0aec0;
+  cursor: not-allowed;
+}
+
+.add-flight-button.disabled:hover {
+  background-color: #e2e2e2; /* No cambia de color en hover */
+}
+
+/* El tooltip se muestra cuando el contenedor es hovereado */
+.add-flight-container:hover .points-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
 .flight-input-form {
   display: flex;
   align-items: center;
@@ -258,4 +280,38 @@
 .flight-close-button:hover {
   background-color: #d4d4d4;
   color: black;
+}
+
+/* Estilos para la barra de progreso en el dropdown */
+.progress-container {
+  padding: 10px 15px;
+  font-size: 14px;
+}
+
+.progress-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.progress-bar-background {
+  height: 8px;
+  width: 100%;
+  background-color: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-foreground {
+  height: 100%;
+  background-color: #4a90e2;
+  border-radius: 4px;
+  transition: width 0.5s ease-in-out;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: #e2e8f0;
+  margin: 8px 0;
 }

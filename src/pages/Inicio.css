@@ -102,3 +102,52 @@
 .feature-card.disabled-card .feature-icon {
   color: #cbd5e0;
 }
+
+/* Rewards Section */
+.rewards-section {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #ffffff; /* Fondo blanco para destacar */
+  margin-top: 60px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.rewards-section h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #1a202c;
+}
+
+.rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reward-item {
+  text-align: center;
+}
+
+.reward-icon {
+  font-size: 2.5rem;
+  color: #4a90e2;
+  margin-bottom: 20px;
+}
+
+.reward-item h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.reward-item p {
+  color: #4a5568;
+  line-height: 1.5;
+  font-size: 1rem;
+}

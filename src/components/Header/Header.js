@@ -9,11 +9,20 @@ const Header = ({ session }) => {
   const [showFlightInput, setShowFlightInput] = useState(false);
   const [flightNumber, setFlightNumber] = useState('');
   const [userMinutes, setUserMinutes] = useState(0);
+  const [monthlyFlightsCount, setMonthlyFlightsCount] = useState(0);
   const dropdownRef = useRef(null);
   const flightFormRef = useRef(null); // Ref para el formulario de vuelo
 
+  const FLIGHT_LIMIT = 5;
+
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-  const toggleFlightInput = () => setShowFlightInput(!showFlightInput);
+  const toggleFlightInput = () => {
+    if (monthlyFlightsCount >= FLIGHT_LIMIT) {
+      alert('Has alcanzado el límite de 5 vuelos registrados este mes.');
+      return;
+    }
+    setShowFlightInput(!showFlightInput);
+  };
 
   const handleFlightSubmit = async (e) => {
     e.preventDefault();
@@ -67,25 +76,41 @@ const Header = ({ session }) => {
     };
     document.addEventListener('mousedown', handleClickOutside);
 
-    const fetchUserMinutes = async () => {
+    const fetchData = async () => {
       if (session?.user) {
-        const { data, error } = await supabase
+        // Fetch user minutes
+        const { data: minutesData, error: minutesError } = await supabase
           .from('ranking_view')
           .select('total_minutes')
           .eq('user_id', session.user.id)
           .single();
 
-        if (error) {
-          console.error('Error fetching user minutes:', error);
-        } else if (data) {
-          setUserMinutes(data.total_minutes);
-        }
+        if (minutesError) console.error('Error fetching user minutes:', minutesError);
+        else if (minutesData) setUserMinutes(minutesData.total_minutes);
+
+        // Fetch monthly flights count
+        const today = new Date();
+        const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+
+        const { count, error: countError } = await supabase
+          .from('flights')
+          .select('*', { count: 'exact', head: true })
+          .eq('user_id', session.user.id)
+          .gte('created_at', startOfMonth.toISOString())
+          .lt('created_at', endOfMonth.toISOString());
+
+        if (countError) console.error('Error fetching monthly flights count:', countError);
+        else setMonthlyFlightsCount(count || 0);
+
       } else {
-        setUserMinutes(0); // Reset minutes on logout
+        // Reset on logout
+        setUserMinutes(0);
+        setMonthlyFlightsCount(0);
       }
     };
 
-    fetchUserMinutes();
+    fetchData();
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -108,7 +133,18 @@ const Header = ({ session }) => {
         {session ? (
           <>
             {!showFlightInput && (
-              <button onClick={toggleFlightInput} className="add-flight-button">+</button>
+              <div className="add-flight-container">
+                <button
+                  onClick={toggleFlightInput}
+                  className={`add-flight-button ${monthlyFlightsCount >= FLIGHT_LIMIT ? 'disabled' : ''}`}
+                  disabled={monthlyFlightsCount >= FLIGHT_LIMIT}
+                >
+                  +
+                </button>
+                {monthlyFlightsCount >= FLIGHT_LIMIT && (
+                  <span className="points-tooltip">Límite mensual de vuelos alcanzado</span>
+                )}
+              </div>
             )}
             {showFlightInput && (
               <form onSubmit={handleFlightSubmit} className="flight-input-form" ref={flightFormRef}>
@@ -136,7 +172,13 @@ const Header = ({ session }) => {
               <div className="profile-icon" onClick={toggleDropdown}>
                 {session.user.email.charAt(0).toUpperCase()}
               </div>
-              {isDropdownOpen && <ProfileDropdown onLogout={() => setIsDropdownOpen(false)} />}
+              {isDropdownOpen && (
+                <ProfileDropdown
+                  onLogout={() => setIsDropdownOpen(false)}
+                  flightsCount={monthlyFlightsCount}
+                  flightLimit={FLIGHT_LIMIT}
+                />
+              )}
             </div>
           </>
         ) : (
