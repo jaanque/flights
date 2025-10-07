@@ -82,6 +82,36 @@ const Notifications = ({ session }) => {
     }
   };
 
+  const handleDelete = async (notificationId) => {
+    const { error } = await supabase
+      .from('notifications')
+      .delete()
+      .eq('id', notificationId);
+
+    if (error) {
+      console.error('Error deleting notification:', error);
+    } else {
+      const updatedNotifications = notifications.filter(n => n.id !== notificationId);
+      setNotifications(updatedNotifications);
+      const unread = updatedNotifications.filter(n => !n.is_read).length;
+      setUnreadCount(unread);
+    }
+  };
+
+  const handleDeleteAll = async () => {
+    const { error } = await supabase
+      .from('notifications')
+      .delete()
+      .eq('user_id', session.user.id);
+
+    if (error) {
+      console.error('Error deleting all notifications:', error);
+    } else {
+      setNotifications([]);
+      setUnreadCount(0);
+    }
+  };
+
   return (
     <div className="notifications-container" ref={dropdownRef}>
       <div className="notification-icon" onClick={handleToggle}>
@@ -90,18 +120,33 @@ const Notifications = ({ session }) => {
       </div>
       {isOpen && (
         <div className="notifications-dropdown">
-          {notifications.length > 0 ? (
-            notifications.map(notification => (
-              <div key={notification.id} className={`notification-item ${!notification.is_read ? 'unread' : ''}`}>
-                <p>{notification.message}</p>
-                <span className="notification-time">
-                  {new Date(notification.created_at).toLocaleString()}
-                </span>
-              </div>
-            ))
-          ) : (
-            <div className="notification-item">No tienes notificaciones.</div>
-          )}
+          <div className="notifications-header">
+            <h4>Notificaciones</h4>
+            {notifications.length > 0 && (
+              <button onClick={handleDeleteAll} className="delete-all-btn">
+                Eliminar todas
+              </button>
+            )}
+          </div>
+          <div className="notifications-list">
+            {notifications.length > 0 ? (
+              notifications.map(notification => (
+                <div key={notification.id} className={`notification-item ${!notification.is_read ? 'unread' : ''}`}>
+                  <div className="notification-content">
+                    <p>{notification.message}</p>
+                    <span className="notification-time">
+                      {new Date(notification.created_at).toLocaleString()}
+                    </span>
+                  </div>
+                  <button onClick={() => handleDelete(notification.id)} className="delete-notification-btn">
+                    ×
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div className="notification-item">No tienes notificaciones.</div>
+            )}
+          </div>
         </div>
       )}
     </div>
