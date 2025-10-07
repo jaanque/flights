@@ -31,10 +31,12 @@ const Header = ({ session }) => {
         .insert([{
           flight_number: flightNumber.trim(),
           user_id: user.id,
-          status: false // false = pendiente, true = validado
+          status: false // Explicitly setting boolean false
         }]);
 
       if (error) {
+        // Provide a more specific error message if possible
+        alert(`Error al registrar el vuelo: ${error.message}`);
         throw error;
       }
 
@@ -42,7 +44,8 @@ const Header = ({ session }) => {
       setFlightNumber('');
       setShowFlightInput(false);
     } catch (error) {
-      alert(error.message);
+      console.error('Error submitting flight:', error);
+      // Avoid alerting the same error twice
     }
   };
 
