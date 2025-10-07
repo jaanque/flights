@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
-import './Ranking.css'; // Asumiremos que crearemos este archivo para los estilos
+import './Ranking.css';
 
 const Ranking = () => {
   const [ranking, setRanking] = useState([]);
@@ -10,25 +10,16 @@ const Ranking = () => {
     const fetchRanking = async () => {
       try {
         setLoading(true);
-        // Obtener perfiles y ordenarlos por 'minutes' en orden descendente
-        // También seleccionamos el email del usuario desde la tabla 'users' de auth
+        // Leemos desde la nueva 'ranking_view', que calculará los totales automáticamente.
+        // La vista contendrá 'username' y 'total_minutes'.
         const { data, error } = await supabase
-          .from('profiles')
-          .select(`
-            username,
-            minutes,
-            user_id
-          `)
-          .order('minutes', { ascending: false });
+          .from('ranking_view') // Leemos desde la vista
+          .select('*') // La vista ya tiene los campos que necesitamos
+          .order('total_minutes', { ascending: false }); // Ordenamos por el total de minutos
 
         if (error) {
           throw error;
         }
-
-        // Para obtener el email, necesitamos hacer una consulta adicional o un join.
-        // Por simplicidad aquí, asumiremos que 'username' en 'profiles' es el email o un nombre de usuario.
-        // Si 'username' no existe en tu tabla 'profiles', esto necesitará un ajuste.
-        // Por ejemplo, podrías tener que buscar cada email por user_id.
 
         setRanking(data);
       } catch (error) {
@@ -58,11 +49,11 @@ const Ranking = () => {
           </tr>
         </thead>
         <tbody>
-          {ranking.map((profile, index) => (
-            <tr key={profile.user_id}>
+          {ranking.map((player, index) => (
+            <tr key={player.user_id}>
               <td>{index + 1}</td>
-              <td>{profile.username || 'Usuario Anónimo'}</td>
-              <td>{profile.minutes}</td>
+              <td>{player.username || 'Usuario Anónimo'}</td>
+              <td>{player.total_minutes}</td>
             </tr>
           ))}
         </tbody>
