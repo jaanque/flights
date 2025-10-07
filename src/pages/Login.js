@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import './Auth.css';
 
@@ -44,6 +44,9 @@ const Login = () => {
             />
             <button type="submit">Iniciar Sesión</button>
           </form>
+          <p>
+            ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
+          </p>
         </div>
       </div>
     </div>
