@@ -50,31 +50,6 @@ function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  useEffect(() => {
-    if (session?.user) {
-      const flightChanges = supabase
-        .channel('public:flights')
-        .on('postgres_changes', {
-          event: 'UPDATE',
-          schema: 'public',
-          table: 'flights',
-          filter: `user_id=eq.${session.user.id}`
-        }, async (payload) => {
-          if (payload.new.status === true && payload.old.status === false) {
-            const message = `Tu vuelo ${payload.new.flight_number} ha sido aprobado. Se han añadido ${payload.new.delay_minutes} minutos a tu cuenta.`;
-            await supabase.from('notifications').insert({
-              user_id: session.user.id,
-              message: message
-            });
-          }
-        })
-        .subscribe();
-
-      return () => {
-        supabase.removeChannel(flightChanges);
-      };
-    }
-  }, [session]);
 
   return (
     <Router>
