@@ -1,16 +1,63 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaPlaneDeparture, FaTrophy, FaListAlt, FaGift, FaSuitcase, FaUserTie } from 'react-icons/fa'; // Importando más iconos
-import './Inicio.css'; // Crearemos este archivo para los estilos
+import { FaPlaneDeparture, FaTrophy, FaListAlt, FaGift, FaSuitcase, FaUserTie } from 'react-icons/fa';
+import { supabase } from '../supabaseClient';
+import './Inicio.css';
 
 const Inicio = () => {
+  const [userProfile, setUserProfile] = useState(null);
+  const [rank, setRank] = useState(null);
+
+  useEffect(() => {
+    const fetchProfileAndRank = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        // Fetch user profile
+        const { data: profile, error: profileError } = await supabase
+          .from('perfiles')
+          .select('nombre_de_usuario, minutos')
+          .eq('identificacion', user.id)
+          .single();
+
+        if (profileError) {
+          console.error('Error fetching user profile:', profileError);
+          return;
+        }
+        setUserProfile(profile);
+
+        // Fetch all profiles to calculate rank
+        const { data: allProfiles, error: allProfilesError } = await supabase
+          .from('perfiles')
+          .select('identificacion, minutos')
+          .order('minutos', { ascending: false });
+
+        if (allProfilesError) {
+          console.error('Error fetching all profiles:', allProfilesError);
+          return;
+        }
+
+        const userRank = allProfiles.findIndex(p => p.identificacion === user.id) + 1;
+        setRank(userRank);
+      }
+    };
+
+    fetchProfileAndRank();
+  }, []);
+
   return (
     <div className="inicio-container">
       <section className="hero-section">
         <div className="hero-content">
-          <h1>Bienvenido a Bordo, Viajero Frecuente</h1>
+          <h1>
+            {userProfile
+              ? `Bienvenido, ${userProfile.nombre_de_usuario}!`
+              : 'Bienvenido a Bordo, Viajero Frecuente'}
+          </h1>
           <p className="subtitle">
-            Registra tus vuelos, acumula minutos por cada retraso y compite para ser el número uno en nuestro ranking.
+            {rank
+              ? `Estás en la posición #${rank} del ranking. ¡Sigue así!`
+              : 'Registra tus vuelos, acumula minutos y compite para ser el número uno.'}
           </p>
           <p>
             Para empezar, simplemente haz clic en el botón "+" del encabezado para añadir tu último número de vuelo.
