@@ -15,7 +15,7 @@ const Inicio = () => {
       if (user) {
         // Fetch user profile
         const { data: profile, error: profileError } = await supabase
-          .from('perfiles')
+          .from('profiles')
           .select('usuario, minutos')
           .eq('identificacion', user.id)
           .single();
@@ -28,7 +28,7 @@ const Inicio = () => {
 
         // Fetch all profiles to calculate rank
         const { data: allProfiles, error: allProfilesError } = await supabase
-          .from('perfiles')
+          .from('profiles')
           .select('identificacion, minutos')
           .order('minutos', { ascending: false });
 

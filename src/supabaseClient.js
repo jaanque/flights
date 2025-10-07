@@ -7,7 +7,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export const checkUsernameUnique = async (username) => {
     const { data, error } = await supabase
-      .from('perfiles')
+      .from('profiles')
       .select('usuario')
       .eq('usuario', username);
 
