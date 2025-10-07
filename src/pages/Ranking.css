@@ -1,0 +1,69 @@
+.ranking-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.ranking-container h1 {
+  margin-bottom: 10px;
+  font-size: 2.5em;
+  color: #333;
+}
+
+.ranking-container p {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.ranking-table thead {
+  background-color: #4CAF50; /* Un color verde para el encabezado */
+  color: white;
+}
+
+.ranking-table th, .ranking-table td {
+  padding: 15px;
+  text-align: left;
+}
+
+.ranking-table th {
+  font-weight: 600;
+}
+
+.ranking-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.ranking-table tbody tr:hover {
+  background-color: #ddd;
+  cursor: default;
+}
+
+.ranking-table td:first-child {
+  font-weight: bold;
+  text-align: center;
+  width: 100px;
+}
+
+/* Estilos para las primeras posiciones */
+.ranking-table tbody tr:first-child {
+  background-color: #FFD700; /* Oro */
+  font-weight: bold;
+}
+
+.ranking-table tbody tr:nth-child(2) {
+  background-color: #C0C0C0; /* Plata */
+}
+
+.ranking-table tbody tr:nth-child(3) {
+  background-color: #CD7F32; /* Bronce */
+}

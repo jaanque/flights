@@ -6,9 +6,45 @@ import './Header.css';
 
 const Header = ({ session }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showFlightInput, setShowFlightInput] = useState(false);
+  const [flightNumber, setFlightNumber] = useState('');
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const toggleFlightInput = () => setShowFlightInput(!showFlightInput);
+
+  const handleFlightSubmit = async (e) => {
+    e.preventDefault();
+    if (!flightNumber.trim()) {
+      alert('Por favor, introduce un número de vuelo.');
+      return;
+    }
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        throw new Error('Debes iniciar sesión para registrar un vuelo.');
+      }
+
+      const { error } = await supabase
+        .from('flights')
+        .insert([{
+          flight_number: flightNumber.trim(),
+          user_id: user.id,
+          status: 'pending'
+        }]);
+
+      if (error) {
+        throw error;
+      }
+
+      alert(`Vuelo ${flightNumber} registrado. Está pendiente de validación.`);
+      setFlightNumber('');
+      setShowFlightInput(false);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -37,7 +73,22 @@ const Header = ({ session }) => {
       <div className="header-right">
         {session ? (
           <>
-            <Link to="/registrar-vuelo" className="add-flight-button">+</Link>
+            {!showFlightInput && (
+              <button onClick={toggleFlightInput} className="add-flight-button">+</button>
+            )}
+            {showFlightInput && (
+              <form onSubmit={handleFlightSubmit} className="flight-input-form">
+                <input
+                  type="text"
+                  value={flightNumber}
+                  onChange={(e) => setFlightNumber(e.target.value)}
+                  placeholder="Nº de vuelo"
+                  className="flight-input"
+                  autoFocus
+                />
+                <button type="submit" className="flight-submit-button">✓</button>
+              </form>
+            )}
             <div className="points-container">
               <div className="points-display">
                 <span>🪙</span> 0

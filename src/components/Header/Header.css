@@ -201,3 +201,39 @@
 .add-flight-button:hover {
   background-color: #ddd;
 }
+
+.flight-input-form {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+.flight-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  width: 100px; /* Adjust as needed */
+}
+
+.flight-submit-button {
+  background-color: #ddd;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 30px;
+}
+
+.flight-submit-button:hover {
+  background-color: #ccc;
+}
