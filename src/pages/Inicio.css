@@ -1,0 +1,104 @@
+.inicio-container {
+  padding: 40px 20px;
+  font-family: 'Inter', sans-serif;
+  color: #1a202c;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #f7f8fc;
+  border-radius: 12px;
+  margin-bottom: 60px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.hero-content .subtitle {
+  font-size: 1.25rem;
+  color: #4a5568;
+  max-width: 600px;
+  margin: 0 auto 25px auto;
+  line-height: 1.6;
+}
+
+.hero-content p {
+  font-size: 1rem;
+  color: #718096;
+}
+
+/* Features Section */
+.features-section {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.feature-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #e2e8f0;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: #4a90e2;
+}
+
+.feature-icon {
+  font-size: 3rem;
+  color: #4a90e2;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+/* Tarjeta deshabilitada para "Registrar Vuelo" */
+.feature-card.disabled-card {
+  background-color: #f7f8fc;
+  cursor: not-allowed;
+  color: #a0aec0;
+}
+
+.feature-card.disabled-card:hover {
+  transform: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-color: #e2e8f0;
+}
+
+.feature-card.disabled-card .feature-icon {
+  color: #cbd5e0;
+}

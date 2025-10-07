@@ -10,6 +10,7 @@ const Header = ({ session }) => {
   const [flightNumber, setFlightNumber] = useState('');
   const [userMinutes, setUserMinutes] = useState(0);
   const dropdownRef = useRef(null);
+  const flightFormRef = useRef(null); // Ref para el formulario de vuelo
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
   const toggleFlightInput = () => setShowFlightInput(!showFlightInput);
@@ -52,8 +53,16 @@ const Header = ({ session }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Cierra el dropdown del perfil
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
+      }
+      // Cierra el formulario de vuelo
+      if (flightFormRef.current && !flightFormRef.current.contains(event.target)) {
+        // Cierra solo si el clic no fue en el botón de abrir (+)
+        if (!event.target.closest('.add-flight-button')) {
+          setShowFlightInput(false);
+        }
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -102,7 +111,7 @@ const Header = ({ session }) => {
               <button onClick={toggleFlightInput} className="add-flight-button">+</button>
             )}
             {showFlightInput && (
-              <form onSubmit={handleFlightSubmit} className="flight-input-form">
+              <form onSubmit={handleFlightSubmit} className="flight-input-form" ref={flightFormRef}>
                 <input
                   type="text"
                   value={flightNumber}
@@ -112,6 +121,7 @@ const Header = ({ session }) => {
                   autoFocus
                 />
                 <button type="submit" className="flight-submit-button">✓</button>
+                <button type="button" onClick={() => setShowFlightInput(false)} className="flight-close-button">×</button>
               </form>
             )}
             <div className="points-container">

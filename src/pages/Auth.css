@@ -1,61 +1,116 @@
+/* General Auth Page Layout */
 .auth-page {
   display: flex;
   height: 100vh;
   width: 100%;
+  font-family: 'Inter', sans-serif; /* Using a more modern font, assuming it's available or imported */
 }
 
+/* Panel de la imagen */
 .auth-image-panel {
-  width: 50%;
+  width: 55%; /* Un poco más de espacio para la imagen */
   background-image: url('https://i.ibb.co/PGnR4T2R/20251007-0102-Apuro-en-la-Puerta-remix-01k6xw2t50f10ta0r6095stpk8.png');
   background-size: cover;
   background-position: center;
+  transition: width 0.5s ease-in-out;
 }
 
+/* Panel del formulario */
 .auth-form-panel {
-  width: 50%;
+  width: 45%;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #f7f8fc; /* Un fondo muy claro y suave */
+  transition: width 0.5s ease-in-out;
 }
 
 .auth-container {
   max-width: 400px;
   width: 100%;
-  padding: 20px;
+  padding: 40px;
   text-align: center;
 }
 
 .auth-container h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 2.5rem; /* Título más grande y con más impacto */
+  font-weight: 700;
+  color: #1a202c; /* Un negro más suave */
+  margin-bottom: 25px;
 }
 
+/* Estructura del formulario */
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-top: 20px;
+  gap: 20px; /* Más espacio entre los campos */
+  margin-top: 25px;
 }
 
 .auth-form input {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px; /* Bordes más redondeados */
   font-size: 16px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #4a90e2; /* Un azul suave para el foco */
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
 }
 
 .auth-form button {
-  padding: 12px;
+  padding: 15px;
   border: none;
-  border-radius: 5px;
-  background-color: #007bff;
+  border-radius: 8px;
+  background-color: #4a90e2; /* Azul principal */
   color: white;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .auth-form button:hover {
-  background-color: #0056b3;
+  background-color: #357abd;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el texto y enlace inferior */
+.auth-container p {
+  margin-top: 25px;
+  color: #4a5568; /* Un gris más oscuro para el texto */
+  font-size: 14px;
+}
+
+.auth-container p a {
+  color: #4a90e2;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.auth-container p a:hover {
+  color: #357abd;
+  text-decoration: underline;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  .auth-image-panel {
+    display: none; /* Ocultar imagen en pantallas pequeñas */
+  }
+  .auth-form-panel {
+    width: 100%;
+  }
 }
