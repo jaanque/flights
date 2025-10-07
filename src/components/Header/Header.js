@@ -8,6 +8,7 @@ const Header = ({ session }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showFlightInput, setShowFlightInput] = useState(false);
   const [flightNumber, setFlightNumber] = useState('');
+  const [userMinutes, setUserMinutes] = useState(0);
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
@@ -56,10 +57,31 @@ const Header = ({ session }) => {
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
+
+    const fetchUserMinutes = async () => {
+      if (session?.user) {
+        const { data, error } = await supabase
+          .from('ranking_view')
+          .select('total_minutes')
+          .eq('user_id', session.user.id)
+          .single();
+
+        if (error) {
+          console.error('Error fetching user minutes:', error);
+        } else if (data) {
+          setUserMinutes(data.total_minutes);
+        }
+      } else {
+        setUserMinutes(0); // Reset minutes on logout
+      }
+    };
+
+    fetchUserMinutes();
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [dropdownRef]);
+  }, [session, dropdownRef]);
 
   return (
     <header className="main-header">
@@ -94,10 +116,10 @@ const Header = ({ session }) => {
             )}
             <div className="points-container">
               <div className="points-display">
-                <span>🪙</span> 0
+                <span>🪙</span> {userMinutes}
               </div>
               <span className="points-tooltip">
-                Estos son tus puntos. Ganas puntos al registrar vuelos.
+                Estos son tus minutos acumulados por retrasos de vuelos.
               </span>
             </div>
             <div className="profile-container" ref={dropdownRef}>

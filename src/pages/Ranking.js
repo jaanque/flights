@@ -15,7 +15,8 @@ const Ranking = () => {
         const { data, error } = await supabase
           .from('ranking_view') // Leemos desde la vista
           .select('*') // La vista ya tiene los campos que necesitamos
-          .order('total_minutes', { ascending: false }); // Ordenamos por el total de minutos
+          .order('total_minutes', { ascending: false }) // Ordenamos por el total de minutos
+          .limit(500); // Limitamos a los primeros 500
 
         if (error) {
           throw error;
