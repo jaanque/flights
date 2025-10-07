@@ -31,7 +31,7 @@ const Header = ({ session }) => {
         .insert([{
           flight_number: flightNumber.trim(),
           user_id: user.id,
-          status: 'pending'
+          status: false // false = pendiente, true = validado
         }]);
 
       if (error) {
