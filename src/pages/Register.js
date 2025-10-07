@@ -47,7 +47,7 @@ const Register = () => {
         const { error: profileError } = await supabase
           .from('perfiles')
           .insert([
-            { identificacion: user.id, nombre_de_usuario: username, actualizado_en: new Date() },
+            { identificacion: user.id, usuario: username, actualizado_en: new Date() },
           ]);
 
         if (profileError) throw profileError;

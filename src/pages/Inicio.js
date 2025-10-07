@@ -16,7 +16,7 @@ const Inicio = () => {
         // Fetch user profile
         const { data: profile, error: profileError } = await supabase
           .from('perfiles')
-          .select('nombre_de_usuario, minutos')
+          .select('usuario, minutos')
           .eq('identificacion', user.id)
           .single();
 
@@ -51,7 +51,7 @@ const Inicio = () => {
         <div className="hero-content">
           <h1>
             {userProfile
-              ? `Bienvenido, ${userProfile.nombre_de_usuario}!`
+              ? `Bienvenido, ${userProfile.usuario}!`
               : 'Bienvenido a Bordo, Viajero Frecuente'}
           </h1>
           <p className="subtitle">
