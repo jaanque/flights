@@ -1,0 +1,79 @@
+.mis-vuelos-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.mis-vuelos-container h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 2.2em;
+  color: #333;
+}
+
+.mis-vuelos-container p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.vuelos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.vuelo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid;
+}
+
+.vuelo-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.flight-number {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.flight-date {
+  font-size: 0.9em;
+  color: #777;
+}
+
+.vuelo-status span {
+  font-weight: bold;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  color: white;
+}
+
+/* Estilo para vuelos pendientes */
+.vuelo-item.pendiente {
+  border-left-color: #f0ad4e; /* Naranja */
+}
+
+.vuelo-item.pendiente .vuelo-status span {
+  background-color: #f0ad4e;
+}
+
+/* Estilo para vuelos verificados */
+.vuelo-item.verificado {
+  border-left-color: #5cb85c; /* Verde */
+}
+
+.vuelo-item.verificado .vuelo-status .minutos-sumados {
+  background-color: #5cb85c;
+}
