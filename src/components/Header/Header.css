@@ -164,3 +164,24 @@
 .logout-button:hover {
   background-color: #f0f0f0;
 }
+
+.add-flight-button {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 24px;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 40px;
+}
+
+.add-flight-button:hover {
+  background-color: #ddd;
+}

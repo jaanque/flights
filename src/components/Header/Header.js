@@ -30,7 +30,6 @@ const Header = ({ session }) => {
       <div className="header-center">
         <nav className="main-menu">
           <Link to="/">Inicio</Link>
-          <Link to="/registrar-vuelo">Registrar Vuelo</Link>
           <Link to="/ranking">Ranking</Link>
           <Link to="/mis-vuelos">Mis Vuelos</Link>
           <Link to="/contacto">Contacto</Link>
@@ -39,6 +38,7 @@ const Header = ({ session }) => {
       <div className="header-right">
         {session ? (
           <>
+            <Link to="/registrar-vuelo" className="add-flight-button">+</Link>
             <div className="points-container">
               <div className="points-display">
                 <span>🪙</span> 0
