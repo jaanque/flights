@@ -164,6 +164,23 @@
   background-color: #f0f0f0;
 }
 
+.dropdown-link {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+  color: black;
+}
+
+.dropdown-link:hover {
+  background-color: #f0f0f0;
+}
+
 .add-flight-button {
   background-color: #f0f0f0;
   border: none;

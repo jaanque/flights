@@ -32,7 +32,6 @@ const Header = ({ session }) => {
           <Link to="/">Inicio</Link>
           <Link to="/ranking">Ranking</Link>
           <Link to="/mis-vuelos">Mis Vuelos</Link>
-          <Link to="/contacto">Contacto</Link>
         </nav>
       </div>
       <div className="header-right">
